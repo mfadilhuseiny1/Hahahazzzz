@@ -114,7 +114,7 @@ export default function Page() {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 flex min-h-screen items-center justify-center px-4 py-8">
+      <div className="relative z-10 flex min-h-screen items-center justify-center px-4 py-8 pb-20">
         <div className="w-full max-w-7xl grid lg:grid-cols-2 gap-16 items-center">
           
           {/* Left Side - Lab Access Information */}
