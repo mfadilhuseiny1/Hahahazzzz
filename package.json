@@ -18,7 +18,7 @@
     "db:up": "drizzle-kit up"
   },
   "dependencies": {
-    "@ai-sdk/fireworks": "^0.1.8",
+    "@ai-sdk/fireworks": "^0.1.18",
     "@ai-sdk/google": "^1.2.22",
     "@ai-sdk/openai": "1.1.9",
     "@ai-sdk/perplexity": "1.1.9",

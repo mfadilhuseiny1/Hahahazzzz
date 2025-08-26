@@ -189,12 +189,12 @@ export default function Page() {
       {/* Background layers */}
       <div className="absolute inset-0 opacity-20">
         <div
-          className="absolute inset-0 bg-[linear-gradient(rgba(6,182,212,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.1)_1px,transparent_1px)] bg-[size:50px_50px]"
-          style={{
-            transform: `translate(${mousePosition.x * 0.01}px, ${
-              mousePosition.y * 0.01
-            }px)`,
-          }}
+        className="absolute inset-0"
+        style={{
+          background: 'linear-gradient(rgba(6,182,212,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(6,182,212,0.1) 1px, transparent 1px)',
+          backgroundSize: '50px 50px',
+          transform: `translate(${mousePosition.x * 0.01}px, ${mousePosition.y * 0.01}px)`,
+        }}
         />
       </div>
       <div className="absolute inset-0 opacity-30">
