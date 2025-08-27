@@ -144,13 +144,13 @@ const SENSOR_COLUMNS = {
     color: 'from-purple-600 to-indigo-600',
     description: 'Available system memory heap space'
   },
-  'time': { 
-    name: 'Timestamp', 
-    icon: Clock, 
-    unit: '', 
-    color: 'from-gray-500 to-slate-500',
-    description: 'Temporal data for trend analysis'
-  }
+  // 'time': { 
+  //   name: 'Timestamp', 
+  //   icon: Clock, 
+  //   unit: '', 
+  //   color: 'from-gray-500 to-slate-500',
+  //   description: 'Temporal data for trend analysis'
+  // }
 }
 
 export default function BRINAquacultureDashboard() {
@@ -168,36 +168,36 @@ export default function BRINAquacultureDashboard() {
     // Initialize with BRIN aquaculture laboratory data
     const environmentalTables = [
       {
-        name: 'sensordata',
+        name: 'S01A',
         displayName: 'Pond 1 Sensors',
-        columns: ['DO', 'PH', 'ORP', 'TDS', 'Temperature', 'time'],
+        columns: ['DO', 'PH', 'ORP', 'TDS', 'Temperature'],
         icon: Waves,
         description: 'Real-time water quality monitoring from Pond 1',
         lastUpdate: '2 minutes ago',
         category: 'environmental' as const
       },
       {
-        name: 'sensordata1',
+        name: 'S02A',
         displayName: 'Pond 2 Sensors',
-        columns: ['DO', 'PH', 'ORP', 'TDS', 'Temperature', 'time'],
+        columns: ['DO', 'PH', 'ORP', 'TDS', 'Temperature'],
         icon: Waves,
         description: 'Real-time water quality monitoring from Pond 2',
         lastUpdate: '3 minutes ago',
         category: 'environmental' as const
       },
       {
-        name: 'sensordata2',
+        name: 'S03A',
         displayName: 'Pond 3 Sensors',
-        columns: ['DO', 'PH', 'ORP', 'TDS', 'Temperature', 'time'],
+        columns: ['DO', 'PH', 'ORP', 'TDS', 'Temperature'],
         icon: Waves,
         description: 'Real-time water quality monitoring from Pond 3',
         lastUpdate: '1 minute ago',
         category: 'environmental' as const
       },
       {
-        name: 'sensordata3',
+        name: 'S04A',
         displayName: 'Pond 4 Sensors',
-        columns: ['DO', 'PH', 'ORP', 'TDS', 'Temperature', 'time'],
+        columns: ['DO', 'PH', 'ORP', 'TDS', 'Temperature'],
         icon: Waves,
         description: 'Real-time water quality monitoring from Pond 4',
         lastUpdate: '4 minutes ago',
@@ -209,7 +209,7 @@ export default function BRINAquacultureDashboard() {
       {
         name: 'system_logs',
         displayName: 'Pond 1 System Diagnostics',
-        columns: ['A_Temp', 'Humidity', 'CPU_Temp', 'V_Input', 'Wifi_S', 'freeHeap', 'time'],
+        columns: ['A_Temp', 'Humidity', 'CPU_Temp', 'V_Input', 'Wifi_S', 'freeHeap'],
         icon: Settings,
         description: 'Infrastructure monitoring and system health for Pond 1',
         lastUpdate: '1 minute ago',
@@ -218,7 +218,7 @@ export default function BRINAquacultureDashboard() {
       {
         name: 'system_logs1',
         displayName: 'Pond 2 System Diagnostics',
-        columns: ['A_Temp', 'Humidity', 'CPU_Temp', 'V_Input', 'Wifi_S', 'freeHeap', 'time'],
+        columns: ['A_Temp', 'Humidity', 'CPU_Temp', 'V_Input', 'Wifi_S', 'freeHeap'],
         icon: Settings,
         description: 'Infrastructure monitoring and system health for Pond 2',
         lastUpdate: '2 minutes ago',
@@ -227,7 +227,7 @@ export default function BRINAquacultureDashboard() {
       {
         name: 'system_logs2',
         displayName: 'Pond 3 System Diagnostics',
-        columns: ['A_Temp', 'Humidity', 'CPU_Temp', 'V_Input', 'Wifi_S', 'freeHeap', 'time'],
+        columns: ['A_Temp', 'Humidity', 'CPU_Temp', 'V_Input', 'Wifi_S', 'freeHeap'],
         icon: Settings,
         description: 'Infrastructure monitoring and system health for Pond 3',
         lastUpdate: '3 minutes ago',
@@ -236,7 +236,7 @@ export default function BRINAquacultureDashboard() {
       {
         name: 'system_logs3',
         displayName: 'Pond 4 System Diagnostics',
-        columns: ['A_Temp', 'Humidity', 'CPU_Temp', 'V_Input', 'Wifi_S', 'freeHeap', 'time'],
+        columns: ['A_Temp', 'Humidity', 'CPU_Temp', 'V_Input', 'Wifi_S', 'freeHeap'],
         icon: Settings,
         description: 'Infrastructure monitoring and system health for Pond 4',
         lastUpdate: '1 minute ago',
@@ -262,7 +262,7 @@ export default function BRINAquacultureDashboard() {
     ])
 
     setSelectedCategory('environmental')
-    setSelectedTable('sensordata')
+    setSelectedTable('S01A')
     setSelectedColumns(['DO', 'PH', 'ORP'])
 
     // Mock live metrics
@@ -303,7 +303,6 @@ export default function BRINAquacultureDashboard() {
     setDownloading(true)
     setDownloadProgress(0)
     
-    // Simulate download progress
     const progressInterval = setInterval(() => {
       setDownloadProgress(prev => {
         if (prev >= 100) {
@@ -315,13 +314,18 @@ export default function BRINAquacultureDashboard() {
     }, 200)
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000)) // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 2000))
       
-      // Mock CSV generation
+      // Fixed CSV generation with proper timestamp format
       const csvContent = `data:text/csv;charset=utf-8,timestamp,${selectedColumns.join(',')}\n` +
-        Array.from({ length: 100 }, (_, i) => 
-          `2024-${String(Math.floor(Math.random() * 12) + 1).padStart(2, '0')}-${String(Math.floor(Math.random() * 28) + 1).padStart(2, '0')} ${String(Math.floor(Math.random() * 24)).padStart(2, '0')}:${String(Math.floor(Math.random() * 60)).padStart(2, '0')}:${String(Math.floor(Math.random() * 60)).padStart(2, '0')},${selectedColumns.map(() => (Math.random() * 100).toFixed(2)).join(',')}`
-        ).join('\n')
+        Array.from({ length: 100 }, (_, i) => {
+          const now = new Date()
+          const pastTime = new Date(now.getTime() - (i * 60000))
+          const wibTime = new Date(pastTime.getTime() + 7 * 60 * 60 * 1000)
+          const timestamp = wibTime.toISOString().replace('T', ' ').slice(0, 19) + ' WIB'
+          
+          return `${timestamp},${selectedColumns.map(() => (Math.random() * 100).toFixed(2)).join(',')}`
+        }).join('\n')
 
       const encodedUri = encodeURI(csvContent)
       const link = document.createElement('a')
@@ -339,6 +343,7 @@ export default function BRINAquacultureDashboard() {
       }, 500)
     }
   }
+
 
   const currentCategory = tableCategories.find(cat => cat.id === selectedCategory)
   const currentTable = currentCategory?.tables.find(t => t.name === selectedTable)
