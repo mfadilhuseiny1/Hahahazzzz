@@ -6,6 +6,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import './globals.css';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXTAUTH_URL || 'http://localhost:4000'),
   title: 'Bluesand Robust Intelligence',
   description: 'Bluesand Robust Intelligence for Aquaculture.',
 };
