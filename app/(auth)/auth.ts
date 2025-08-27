@@ -18,6 +18,7 @@ export const {
 } = NextAuth({
   ...authConfig,
   debug: true,
+  trustHost: true, 
   providers: [
     Credentials({
       credentials: {},
