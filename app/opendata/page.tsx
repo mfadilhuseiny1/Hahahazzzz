@@ -314,17 +314,19 @@ export default function BRINAquacultureDashboard() {
     }, 200)
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      
-      // Fixed CSV generation with proper timestamp format
+      const response = await fetch(`/api/influx?measurement=${selectedTable}&fields=${selectedColumns.join(',')}&timeRange=${selectedInterval.replace(' ', '')}`)
+      const data = await response.json()
+
+      if (!data || !Array.isArray(data) || data.length === 0) {
+        throw new Error('No data found')
+      }
+
+      // Convert to CSV
       const csvContent = `data:text/csv;charset=utf-8,timestamp,${selectedColumns.join(',')}\n` +
-        Array.from({ length: 100 }, (_, i) => {
-          const now = new Date()
-          const pastTime = new Date(now.getTime() - (i * 60000))
-          const wibTime = new Date(pastTime.getTime() + 7 * 60 * 60 * 1000)
+        data.map((row: any) => {
+          const wibTime = new Date(new Date(row.time).getTime() + 7 * 60 * 60 * 1000)
           const timestamp = wibTime.toISOString().replace('T', ' ').slice(0, 19) + ' WIB'
-          
-          return `${timestamp},${selectedColumns.map(() => (Math.random() * 100).toFixed(2)).join(',')}`
+          return `${timestamp},${selectedColumns.map(col => row[col] || '').join(',')}`
         }).join('\n')
 
       const encodedUri = encodeURI(csvContent)
@@ -336,6 +338,7 @@ export default function BRINAquacultureDashboard() {
       document.body.removeChild(link)
     } catch (error) {
       console.error('Download failed:', error)
+      alert('Failed to fetch data from InfluxDB')
     } finally {
       setTimeout(() => {
         setDownloading(false)
