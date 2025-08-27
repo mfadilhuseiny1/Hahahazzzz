@@ -101,7 +101,9 @@ const SensorDataSummary = ({ result }: SensorDataSummaryProps) => {
                 {convertedData.slice(0, 10).map((row, idx) => (
                   <tr key={idx} className="border-b">
                     {Object.values(row).map((value, i) => (
-                      <td key={i} className="p-2">{String(value)}</td>
+                      <td key={i} className="p-2">
+                        {typeof value === 'number' ? (value as number).toFixed(3) : String(value)}
+                      </td>
                     ))}
                   </tr>
                 ))}
