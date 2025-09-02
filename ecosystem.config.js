@@ -3,7 +3,7 @@ module.exports = {
     name: 'ai-chatbot',
     script: 'pnpm',
     args: 'start',
-    cron_restart: '0 */2 * * *', // Auto restart setiap 2 jam
+    cron_restart: '0 */1 * * *', // Auto restart setiap 1 jam
     max_memory_restart: '800M',
     env: {
       NODE_ENV: 'production'
