@@ -18,12 +18,12 @@ export const DEFAULT_CHAT_MODEL: string = 'chat-model-data';
 export const myProvider = customProvider({
   languageModels: {
     // 'chat-model-data': openai('gpt-4o'),
-    'chat-model-data': openai('gpt-5-mini'),
+    'chat-model-data': openai('gpt-4o'),
     // 'chat-model-data': wrapLanguageModel({
     //   model: fireworks('accounts/fireworks/models/llama4-maverick-instruct-basic'),
     //   middleware: extractReasoningMiddleware({ tagName: 'think' }),
     // }),
-    'chat-model-large': openai('gpt-5'),
+    'chat-model-large': openai('gpt-4o'),
     'chat-model-reasoning': wrapLanguageModel({
       model: fireworks('accounts/fireworks/models/deepseek-r1'),
       middleware: extractReasoningMiddleware({ tagName: 'think' }),
