@@ -18,7 +18,7 @@ export const DEFAULT_CHAT_MODEL: string = 'chat-model-data';
 export const myProvider = customProvider({
   languageModels: {
     // 'chat-model-data': openai('gpt-4o'),
-    'chat-model-onl': google('gemini-2.5-pro'),
+    'chat-model-onl': openai('gpt-5-mini'),
     // 'chat-model-data': wrapLanguageModel({
     //   model: fireworks('accounts/fireworks/models/llama4-maverick-instruct-basic'),
     //   middleware: extractReasoningMiddleware({ tagName: 'think' }),
